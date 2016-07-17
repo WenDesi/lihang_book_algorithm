@@ -69,6 +69,7 @@ def Predict(testset,trainset,train_labels):
             if dist < max_dist:
                 knn_list[max_index] = (dist,label)
                 max_index = -1
+                max_dist = 0
 
 
         # 统计选票

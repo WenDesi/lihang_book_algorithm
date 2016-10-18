@@ -2,7 +2,7 @@
 
 import cv2
 import time
-import math
+import logging
 import numpy as np
 import pandas as pd
 
@@ -10,7 +10,21 @@ import pandas as pd
 from sklearn.cross_validation import train_test_split
 from sklearn.metrics import accuracy_score
 
+
 total_class = 10
+
+def log(func):
+    def wrapper(*args, **kwargs):
+        start_time = time.time()
+        logging.debug('start %s()' % func.__name__)
+        ret = func(*args, **kwargs)
+
+        end_time = time.time()
+        logging.debug('end %s(), cost %s seconds' % (func.__name__,end_time-start_time))
+
+        return ret
+    return wrapper
+
 
 # 二值化
 def binaryzation(img):
@@ -18,6 +32,7 @@ def binaryzation(img):
     cv2.threshold(cv_img,50,1,cv2.cv.CV_THRESH_BINARY_INV,cv_img)
     return cv_img
 
+@log
 def binaryzation_features(trainset):
     features = []
 
@@ -48,8 +63,6 @@ class Tree(object):
     def predict(self,features):
         if self.node_type == 'leaf':
             return self.Class
-
-        print 'in'
 
         tree = self.dict[features[self.feature]]
         return tree.predict(features)
@@ -94,34 +107,22 @@ def calc_ent_grap(x,y):
 
     return ent_grap
 
-def train(train_set,train_label,features,epsilon):
+def recurse_train(train_set,train_label,features,epsilon):
     global total_class
 
     LEAF = 'leaf'
     INTERNAL = 'internal'
 
-
     # 步骤1——如果train_set中的所有实例都属于同一类Ck
-    label_dict = [0 for i in xrange(total_class)]
-    for label in train_label:
-        label_dict[label] += 1
-
-    for label, label_count in enumerate(label_dict):
-        if label_count == len(train_label):
-            tree = Tree(LEAF,Class = label)
-            return tree
+    label_set = set(train_label)
+    if len(label_set) == 1:
+        return Tree(LEAF,Class = label_set.pop())
 
     # 步骤2——如果features为空
-    max_len,max_class = 0,0
-    for i in xrange(total_class):
-        class_i = filter(lambda x:x==i,train_label)
-        if len(class_i) > max_len:
-            max_class = i
-            max_len = len(class_i)
+    (max_class,max_len) = max([(i,len(filter(lambda x:x==i,train_label))) for i in xrange(total_class)],key = lambda x:x[1])
 
     if len(features) == 0:
-        tree = Tree(LEAF,Class = max_class)
-        return tree
+        return Tree(LEAF,Class = max_class)
 
     # 步骤3——计算信息增益
     max_feature = 0
@@ -138,8 +139,7 @@ def train(train_set,train_label,features,epsilon):
 
     # 步骤4——小于阈值
     if max_gda < epsilon:
-        tree = Tree(LEAF,Class = max_class)
-        return tree
+        return Tree(LEAF,Class = max_class)
 
     # 步骤5——构建非空子集
     sub_features = filter(lambda x:x!=max_feature,features)
@@ -157,11 +157,16 @@ def train(train_set,train_label,features,epsilon):
         sub_train_set = train_set[index]
         sub_train_label = train_label[index]
 
-        sub_tree = train(sub_train_set,sub_train_label,sub_features,epsilon)
+        sub_tree = recurse_train(sub_train_set,sub_train_label,sub_features,epsilon)
         tree.add_tree(feature_value,sub_tree)
 
     return tree
 
+@log
+def train(train_set,train_label,features,epsilon):
+    return recurse_train(train_set,train_label,features,epsilon)
+
+@log
 def predict(test_set,tree):
 
     result = []
@@ -173,31 +178,8 @@ def predict(test_set,tree):
 
 
 if __name__ == '__main__':
-    # classes = [0,0,1,1,0,0,0,1,1,1,1,1,1,1,0]
-    #
-    # age = [0,0,0,0,0,1,1,1,1,1,2,2,2,2,2]
-    # occupation = [0,0,1,1,0,0,0,1,0,0,0,0,1,1,0]
-    # house = [0,0,0,1,0,0,0,1,1,1,1,1,0,0,0]
-    # loan = [0,1,1,0,0,0,1,1,2,2,2,1,1,2,0]
-    #
-    # features = []
-    #
-    # for i in range(15):
-    #     feature = [age[i],occupation[i],house[i],loan[i]]
-    #     features.append(feature)
-    #
-    # trainset = np.array(features)
-    #
-    # tree = train(trainset,np.array(classes),[0,1,2,3],0.1)
-    #
-    # print type(tree)
-    # features = [0,0,0,1]
-    # print tree.predict(np.array(features))
-
-
-    print 'Start read data'
-
-    time_1 = time.time()
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
 
     raw_data = pd.read_csv('../data/train.csv',header=0)
     data = raw_data.values
@@ -205,29 +187,16 @@ if __name__ == '__main__':
     imgs = data[0::,1::]
     labels = data[::,0]
 
+    # 图片二值化
     features = binaryzation_features(imgs)
 
     # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
     train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.33, random_state=23323)
-    # print train_features.shape
-    # print train_features.shape
 
-    time_2 = time.time()
-    print 'read data cost ',time_2 - time_1,' second','\n'
-
-    print 'Start training'
-    tree = train(train_features,train_labels,[i for i in range(784)],0.2)
-    print type(tree)
-    print 'knn do not need to train'
-    time_3 = time.time()
-    print 'training cost ',time_3 - time_2,' second','\n'
-
-    print 'Start predicting'
+    tree = train(train_features,train_labels,[i for i in range(784)],0.1)
     test_predict = predict(test_features,tree)
-    time_4 = time.time()
-    print 'predicting cost ',time_4 - time_3,' second','\n'
-
     score = accuracy_score(test_labels,test_predict)
+
     print "The accruacy socre is ", score
 
 

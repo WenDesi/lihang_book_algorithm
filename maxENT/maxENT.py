@@ -5,16 +5,12 @@
 # @Last modified by:   WenDesi
 # @Last modified time: 06-11-16
 
-import cv2
-import csv
+
 import math
-import numpy as np
-import pandas as pd
+import random
 
 from collections import defaultdict
 
-from sklearn.cross_validation import train_test_split
-from sklearn.metrics import accuracy_score
 
 
 class MaxEnt(object):
@@ -64,7 +60,6 @@ class MaxEnt(object):
             if self.fxy(x, y):
                 id = self.xy2id[(x, y)]
                 result += self.w[id]
-        print result
         return (math.exp(result),y)
 
     def cal_probality(self, X):
@@ -98,16 +93,9 @@ class MaxEnt(object):
             print 'iterater times %d' % times
             sigmas = []
             self.cal_EPx()
-            print self.EPx[243]
 
             for i in xrange(self.n):
-                try:
-                    sigma = 1 / self.M * math.log(self.EPxy[i] / self.EPx[i])
-                except:
-                    print i
-                    print self.EPx[i]
-                    print self.id2xy[i]
-                    return
+                sigma = 1 / self.M * math.log(self.EPxy[i] / self.EPx[i])
                 sigmas.append(sigma)
 
             if len(filter(lambda x: abs(x) >= 0.01, sigmas)) == 0:
@@ -123,74 +111,67 @@ class MaxEnt(object):
         return results
 
 
-def rebuild_X(X):
-    new_X = []
-    for x in X:
-        new_x = []
-        for i in range(len(x)):
-            new_x.append(i * 2 + x[i])
-        new_X.append(new_x)
+def build_dataset(label,original_posins,radius,size):
+    datasets = []
+    dim = len(original_posins)
 
-    print 'end build'
-    return new_X
+    for i in xrange(size):
+        dataset = [label]
+        for j in xrange(dim):
+            point = random.randint(0,2*radius)-radius+original_posins[j]
+            dataset.append(point)
+        datasets.append(dataset)
 
-#
-# def read_demo(filepath='C:/Users/1501213972/Desktop/data.txt'):
-#     features = []
-#     labels = []
-#     for line in open(filepath, "r"):
-#         sample = line.strip().split("\t")
-#         if len(sample) < 2:  # 至少：标签+一个特征
-#             continue
-#         y = sample[0]
-#         X = sample[1:]
-#         features.append(X)
-#         labels.append(y)
-#
-#     return features, labels
+    return datasets
 
-# 二值化
-def binaryzation(img):
-    cv_img = img.astype(np.uint8)
-    cv2.threshold(cv_img,50,1,cv2.cv.CV_THRESH_BINARY_INV,cv_img)
-    return cv_img
 
-def binaryzation_features(trainset):
-    features = []
 
-    for img in trainset:
-        img = np.reshape(img,(28,28))
-        cv_img = img.astype(np.uint8)
+def rebuild_features(features):
+    new_features = []
+    for feature in features:
+        new_feature = []
+        for i,f in enumerate(feature):
+            new_feature.append(str(i)+'_'+str(f))
+        new_features.append(new_feature)
+    return new_features
 
-        img_b = binaryzation(cv_img)
-        # hog_feature = np.transpose(hog_feature)
-        features.append(img_b)
 
-    features = np.array(features)
-    features = np.reshape(features,(-1,784))
 
-    return features
+
+
 
 if __name__ == "__main__":
-    raw_data = pd.read_csv('../data/train.csv',header=0)
-    data = raw_data.values
 
-    imgs = data[0::,1::]
-    labels = data[::,0]
+    # 构建训练集
+    trainset1 = build_dataset(0,[0,0],10,100)
+    trainset2 = build_dataset(1,[30,30],10,100)
 
-    # 图片二值化
-    features = binaryzation_features(imgs)
+    trainset = trainset1
+    trainset.extend(trainset2)
+    random.shuffle(trainset)
 
-    # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
-    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.8, random_state=23323)
+    trainset_features = rebuild_features(map(lambda x:x[1:], trainset))
+    trainset_labels = map(lambda x:x[0], trainset)
 
-    print 'end read'
-
+    # 训练
     met = MaxEnt()
-    met.train(rebuild_X(train_features), train_labels)
+    met.train(trainset_features,trainset_labels)
 
-    print 'end train'
+    # 构建测试集
+    testset1 = build_dataset(0,[0,0],15,500)
+    testset2 = build_dataset(1,[30,30],15,500)
 
-    test_predict = met.predict(rebuild_X(test_features))
-    score = accuracy_score(test_labels,test_predict)
+    testset = testset1
+    testset.extend(testset2)
+    random.shuffle(testset)
+
+    testset_features = rebuild_features(map(lambda x:x[1:], testset))
+    testset_labels = map(lambda x:x[0], testset)
+
+    # 测试
+    testset_predicts = met.predict(testset_features)
+    accuracy_score = float(len(filter(lambda x:x==True,[testset_labels[i]==testset_predicts[i] for i in xrange(len(testset_predicts))])))/float(len(testset_predicts))
+    print "The accruacy socre is ", accuracy_score
+
+
 

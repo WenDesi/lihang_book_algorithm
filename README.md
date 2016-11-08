@@ -23,7 +23,7 @@
 
 ### 第二章 感知器模型
 博客：[李航《统计学习方法》第二章——用Python实现感知器模型（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/51923546)
-代码：[perceptron/binary_perceptron.py)
+代码：[perceptron/binary_perceptron.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/perceptron/binary_perceptron.py)
 
 ### 第三章 K近邻法
 博客：[李航《统计学习方法》第三章——用Python实现KNN算法（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/51933044)

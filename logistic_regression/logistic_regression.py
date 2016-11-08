@@ -5,111 +5,103 @@
 # @Last modified by:   WenDesi
 # @Last modified time: 08-11-16
 
+import time
 import math
 import random
 
-
-def predict_(x, w):
-    wx = sum([w[j] * x[j] for j in xrange(len(w))])
-    exp_wx = math.exp(wx)
-
-    predict1 = exp_wx / (1 + exp_wx)
-    predict0 = 1 / (1 + exp_wx)
-
-    if predict1 > predict0:
-        return 1
-    else:
-        return 0
+import pandas as pd
+from sklearn.cross_validation import train_test_split
+from sklearn.metrics import accuracy_score
 
 
-def train(features, labels):
-    w = [0.0] * (len(features[0]) + 1)
+class LogisticRegression(object):
 
-    learning_step = 0.00001
-    max_iteration = 1000
-    correct_count = 0
-    time = 0
+    def __init__(self):
+        self.learning_step = 0.00001
+        self.max_iteration = 5000
 
-    while time < max_iteration:
-        index = random.randint(0, len(labels) - 1)
-        x = features[index]
-        x.append(1.0)
-        y = labels[index]
-
-        if y == predict_(x, w):
-            correct_count += 1
-            if correct_count > max_iteration:
-                break
-            continue
-
-        print 'iterater times %d' % time
-        time += 1
-        correct_count = 0
-
-        wx = sum([w[i] * x[i] for i in xrange(len(w))])
+    def predict_(self,x):
+        wx = sum([self.w[j] * x[j] for j in xrange(len(self.w))])
         exp_wx = math.exp(wx)
 
-        for i in xrange(len(w)):
-            w[i] -= learning_step * (-y * x[i] + float(x[i] * exp_wx) / float(1 + exp_wx))
+        predict1 = exp_wx / (1 + exp_wx)
+        predict0 = 1 / (1 + exp_wx)
 
-    return w
-
-
-def predict(features, w):
-    labels = []
-
-    for feature in features:
-        feature.append(1)
-        x = feature
-
-        labels.append(predict_(x,w))
-
-    return labels
+        if predict1 > predict0:
+            return 1
+        else:
+            return 0
 
 
-def build_dataset(label, original_posins, radius, size):
-    datasets = []
-    dim = len(original_posins)
+    def train(self,features, labels):
+        self.w = [0.0] * (len(features[0]) + 1)
 
-    for i in xrange(size):
-        dataset = [label]
-        for j in xrange(dim):
-            point = random.randint(0, 2 * radius) - radius + original_posins[j]
-            dataset.append(point)
-        datasets.append(dataset)
+        correct_count = 0
+        time = 0
 
-    return datasets
+        while time < self.max_iteration:
+            index = random.randint(0, len(labels) - 1)
+            x = list(features[index])
+            x.append(1.0)
+            y = labels[index]
+
+            if y == self.predict_(x):
+                correct_count += 1
+                if correct_count > self.max_iteration:
+                    break
+                continue
+
+            # print 'iterater times %d' % time
+            time += 1
+            correct_count = 0
+
+            wx = sum([self.w[i] * x[i] for i in xrange(len(self.w))])
+            exp_wx = math.exp(wx)
+
+            for i in xrange(len(self.w)):
+                self.w[i] -= self.learning_step * \
+                    (-y * x[i] + float(x[i] * exp_wx) / float(1 + exp_wx))
+
+
+    def predict(self,features):
+        labels = []
+
+        for feature in features:
+            x = list(feature)
+            x.append(1)
+            labels.append(self.predict_(x))
+
+        return labels
 
 if __name__ == "__main__":
+    print 'Start read data'
 
-    # 构建训练集
-    trainset1 = build_dataset(0, [0, 0], 10, 100)
-    trainset2 = build_dataset(1, [30, 30], 10, 100)
+    time_1 = time.time()
 
-    trainset = trainset1
-    trainset.extend(trainset2)
-    random.shuffle(trainset)
+    raw_data = pd.read_csv('../data/train_binary.csv',header=0)
+    data = raw_data.values
 
-    trainset_features = map(lambda x: x[1:], trainset)
-    trainset_labels = map(lambda x: x[0], trainset)
+    imgs = data[0::,1::]
+    labels = data[::,0]
 
-    # 训练
-    w = train(trainset_features, trainset_labels)
 
-    # 构建测试集
-    testset1 = build_dataset(0, [0, 0], 10, 500)
-    testset2 = build_dataset(1, [30, 30], 10, 500)
+    # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
+    train_features, test_features, train_labels, test_labels = train_test_split(imgs, labels, test_size=0.33, random_state=23323)
 
-    testset = testset1
-    testset.extend(testset2)
-    random.shuffle(testset)
+    time_2 = time.time()
+    print 'read data cost ',time_2 - time_1,' second','\n'
 
-    testset_features = map(lambda x: x[1:], testset)
-    testset_labels = map(lambda x: x[0], testset)
+    print 'Start training'
+    lr = LogisticRegression()
+    lr.train(train_features, train_labels)
 
-    # 测试
-    testset_predicts = predict(testset_features, w)
-    print 'asad'
-    accuracy_score = float(len(filter(lambda x: x == True, [testset_labels[i] == testset_predicts[
-                           i] for i in xrange(len(testset_predicts))]))) / float(len(testset_predicts))
-    print "The accruacy socre is ", accuracy_score
+    time_3 = time.time()
+    print 'training cost ',time_3 - time_2,' second','\n'
+
+    print 'Start predicting'
+    test_predict = lr.predict(test_features)
+    time_4 = time.time()
+    print 'predicting cost ',time_4 - time_3,' second','\n'
+
+    score = accuracy_score(test_labels,test_predict)
+    print "The accruacy socre is ", score

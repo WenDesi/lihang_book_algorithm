@@ -3,7 +3,7 @@
 @Date:   09-08-16
 @Email:  wendesi@foxmail.com
 @Last modified by:   WenDesi
-@Last modified time: 08-11-16
+@Last modified time: 09-11-16
 -->
 
 
@@ -42,4 +42,5 @@
 <br>代码：[logistic_regression/logistic_regression.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/logistic_regression/logistic_regression.py)
 
 ### 第六章 最大熵模型
-正在施工中。。。
+博客：[李航《统计学习方法》第六章——用Python实现最大熵模型（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/53106579)
+<br>代码：[maxENT/maxENT.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/maxENT/maxENT.py)

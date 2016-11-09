@@ -3,14 +3,20 @@
 # @Date:   05-11-16
 # @Email:  wendesi@foxmail.com
 # @Last modified by:   WenDesi
-# @Last modified time: 06-11-16
+# @Last modified time: 09-11-16
 
 
+import pandas as pd
+import numpy as np
+
+import time
 import math
 import random
 
 from collections import defaultdict
 
+from sklearn.cross_validation import train_test_split
+from sklearn.metrics import accuracy_score
 
 
 class MaxEnt(object):
@@ -21,9 +27,10 @@ class MaxEnt(object):
 
         self.cal_Pxy_Px(X, Y)
 
-        self.N = len(X)
-        self.n = len(self.Pxy)
-        self.M = 2.0
+        self.N = len(X)                 # 训练集大小
+        self.n = len(self.Pxy)          # 书中(x,y)对数
+        self.M = 10000.0                # 书91页那个M，但实际操作中并没有用那个值
+        # 可认为是学习速率
 
         self.build_dict()
         self.cal_EPxy()
@@ -49,29 +56,37 @@ class MaxEnt(object):
                 self.Px[x] += 1
 
     def cal_EPxy(self):
+        '''
+        计算书中82页最下面那个期望
+        '''
         self.EPxy = defaultdict(float)
         for id in xrange(self.n):
             (x, y) = self.id2xy[id]
             self.EPxy[id] = float(self.Pxy[(x, y)]) / float(self.N)
 
-    def cal_pyx(self,X,y):
+    def cal_pyx(self, X, y):
         result = 0.0
         for x in X:
             if self.fxy(x, y):
                 id = self.xy2id[(x, y)]
                 result += self.w[id]
-        return (math.exp(result),y)
+        return (math.exp(result), y)
 
     def cal_probality(self, X):
-        Pyxs = [(self.cal_pyx(X,y)) for y in self.Y_]
+        '''
+        计算书85页公式6.22
+        '''
+        Pyxs = [(self.cal_pyx(X, y)) for y in self.Y_]
         Z = sum([prob for prob, y in Pyxs])
-        return [(prob/Z,y) for prob,y in Pyxs]
-
+        return [(prob / Z, y) for prob, y in Pyxs]
 
     def cal_EPx(self):
+        '''
+        计算书83页最上面那个期望
+        '''
         self.EPx = [0.0 for i in xrange(self.n)]
 
-        for i,X in enumerate(self.X_):
+        for i, X in enumerate(self.X_):
             Pyxs = self.cal_probality(X)
 
             for x in X:
@@ -98,8 +113,8 @@ class MaxEnt(object):
                 sigma = 1 / self.M * math.log(self.EPxy[i] / self.EPx[i])
                 sigmas.append(sigma)
 
-            if len(filter(lambda x: abs(x) >= 0.01, sigmas)) == 0:
-                break
+            # if len(filter(lambda x: abs(x) >= 0.01, sigmas)) == 0:
+            #     break
 
             self.w = [self.w[i] + sigmas[i] for i in xrange(self.n)]
 
@@ -111,67 +126,53 @@ class MaxEnt(object):
         return results
 
 
-def build_dataset(label,original_posins,radius,size):
-    datasets = []
-    dim = len(original_posins)
-
-    for i in xrange(size):
-        dataset = [label]
-        for j in xrange(dim):
-            point = random.randint(0,2*radius)-radius+original_posins[j]
-            dataset.append(point)
-        datasets.append(dataset)
-
-    return datasets
-
-
-
 def rebuild_features(features):
+    '''
+    将原feature的（a0,a1,a2,a3,a4,...）
+    变成 (0_a0,1_a1,2_a2,3_a3,4_a4,...)形式
+    '''
     new_features = []
     for feature in features:
         new_feature = []
-        for i,f in enumerate(feature):
-            new_feature.append(str(i)+'_'+str(f))
+        for i, f in enumerate(feature):
+            new_feature.append(str(i) + '_' + str(f))
         new_features.append(new_feature)
     return new_features
 
 
-
-
-
-
 if __name__ == "__main__":
 
-    # 构建训练集
-    trainset1 = build_dataset(0,[0,0],10,100)
-    trainset2 = build_dataset(1,[30,30],10,100)
+    print 'Start read data'
 
-    trainset = trainset1
-    trainset.extend(trainset2)
-    random.shuffle(trainset)
+    time_1 = time.time()
 
-    trainset_features = rebuild_features(map(lambda x:x[1:], trainset))
-    trainset_labels = map(lambda x:x[0], trainset)
+    raw_data = pd.read_csv('../data/train_binary.csv', header=0)
+    data = raw_data.values
 
-    # 训练
+    imgs = data[0::, 1::]
+    labels = data[::, 0]
+
+    # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
+    train_features, test_features, train_labels, test_labels = train_test_split(
+        imgs, labels, test_size=0.33, random_state=23323)
+
+    train_features = rebuild_features(train_features)
+    test_features = rebuild_features(test_features)
+
+    time_2 = time.time()
+    print 'read data cost ', time_2 - time_1, ' second', '\n'
+
+    print 'Start training'
     met = MaxEnt()
-    met.train(trainset_features,trainset_labels)
+    met.train(train_features, train_labels)
 
-    # 构建测试集
-    testset1 = build_dataset(0,[0,0],15,500)
-    testset2 = build_dataset(1,[30,30],15,500)
+    time_3 = time.time()
+    print 'training cost ', time_3 - time_2, ' second', '\n'
 
-    testset = testset1
-    testset.extend(testset2)
-    random.shuffle(testset)
+    print 'Start predicting'
+    test_predict = met.predict(test_features)
+    time_4 = time.time()
+    print 'predicting cost ', time_4 - time_3, ' second', '\n'
 
-    testset_features = rebuild_features(map(lambda x:x[1:], testset))
-    testset_labels = map(lambda x:x[0], testset)
-
-    # 测试
-    testset_predicts = met.predict(testset_features)
-    accuracy_score = float(len(filter(lambda x:x==True,[testset_labels[i]==testset_predicts[i] for i in xrange(len(testset_predicts))])))/float(len(testset_predicts))
-    print "The accruacy socre is ", accuracy_score
-
-
-
+    score = accuracy_score(test_labels, test_predict)
+    print "The accruacy socre is ", score

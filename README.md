@@ -44,3 +44,6 @@
 ### 第六章 最大熵模型
 博客：[李航《统计学习方法》第六章——用Python实现最大熵模型（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/53106579)
 <br>代码：[maxENT/maxENT.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/maxENT/maxENT.py)
+
+### 第七章 支持向量机
+正在施工中...

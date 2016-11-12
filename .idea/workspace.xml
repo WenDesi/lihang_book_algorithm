@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="045e9bf9-f3f7-4538-969d-2b496007acc0" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mnist_test.iml" afterPath="$PROJECT_DIR$/.idea/mnist_test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm/svm_test.py" afterPath="$PROJECT_DIR$/svm/svm_test.py" />
     </list>
     <ignored path="mnist_test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,10 +20,11 @@
     <SUITE FILE_PATH="coverage/mnist_test$binary_perceptron.coverage" NAME="binary_perceptron Coverage Results" MODIFIED="1478593588448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/perceptron" />
     <SUITE FILE_PATH="coverage/lihang_book_algorithm$maxENT.coverage" NAME="maxENT Coverage Results" MODIFIED="1478540189924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/maxENT" />
     <SUITE FILE_PATH="coverage/mnist_test$logistic_regression.coverage" NAME="logistic_regression Coverage Results" MODIFIED="1478597251848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logistic_regression" />
-    <SUITE FILE_PATH="coverage/mnist_test$svm_test.coverage" NAME="svm_test Coverage Results" MODIFIED="1478953166281" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
+    <SUITE FILE_PATH="coverage/mnist_test$svm_test.coverage" NAME="svm_test Coverage Results" MODIFIED="1478953813550" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
     <SUITE FILE_PATH="coverage/mnist_test$w2.coverage" NAME="w2 Coverage Results" MODIFIED="1478372917488" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/Desktop" />
     <SUITE FILE_PATH="coverage/mnist_test$rebuild_original_data.coverage" NAME="rebuild_original_data Coverage Results" MODIFIED="1478745081716" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_symptom_test/构建数据集" />
     <SUITE FILE_PATH="coverage/mnist_test$build_dataset.coverage" NAME="build_dataset Coverage Results" MODIFIED="1478747444650" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_symptom_test/构建数据集" />
+    <SUITE FILE_PATH="coverage/mnist_test$svm_with_save_E.coverage" NAME="svm_with_save_E Coverage Results" MODIFIED="1478955409122" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
     <SUITE FILE_PATH="coverage/mnist_test$build_features.coverage" NAME="build_features Coverage Results" MODIFIED="1478758936321" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_symptom_test/构建数据集" />
     <SUITE FILE_PATH="coverage/mnist_test$maxENT.coverage" NAME="maxENT Coverage Results" MODIFIED="1478417048812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/maxENT" />
     <SUITE FILE_PATH="coverage/mnist_test$svm.coverage" NAME="svm Coverage Results" MODIFIED="1478766960147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_symptom_test/实验" />
@@ -40,12 +39,26 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="svm_test.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="svm_test.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/svm/svm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2521">
-              <caret line="219" column="42" selection-start-line="219" selection-start-column="42" selection-end-line="219" selection-end-column="42" />
-              <folding />
+            <state relative-caret-position="137">
+              <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
+              <folding>
+                <element signature="e#151#162#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="svm_with_save_E.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/svm/svm_with_save_E.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
+              <folding>
+                <element signature="e#151#162#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -72,6 +85,7 @@
         <option value="$PROJECT_DIR$/../sci_symptom_test/构建数据集/build_features.py" />
         <option value="$PROJECT_DIR$/../sci_symptom_test/实验/svm.py" />
         <option value="$PROJECT_DIR$/svm/svm_test.py" />
+        <option value="$PROJECT_DIR$/svm/svm_with_save_E.py" />
       </list>
     </option>
   </component>
@@ -125,25 +139,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.svm_test">
-    <configuration default="false" name="rebuild_original_data" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/../sci_symptom_test/构建数据集" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="sci_symptom_test" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/../sci_symptom_test/构建数据集/rebuild_original_data.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.svm_with_save_E">
     <configuration default="false" name="build_dataset" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -212,6 +208,24 @@
       <module name="mnist_test" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/svm/svm_test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="svm_with_save_E" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\Anaconda\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/svm" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="mnist_test" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/svm/svm_with_save_E.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -425,19 +439,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.rebuild_original_data" />
-      <item index="1" class="java.lang.String" itemvalue="Python.build_dataset" />
-      <item index="2" class="java.lang.String" itemvalue="Python.build_features" />
-      <item index="3" class="java.lang.String" itemvalue="Python.svm" />
-      <item index="4" class="java.lang.String" itemvalue="Python.svm_test" />
+      <item index="0" class="java.lang.String" itemvalue="Python.build_dataset" />
+      <item index="1" class="java.lang.String" itemvalue="Python.build_features" />
+      <item index="2" class="java.lang.String" itemvalue="Python.svm" />
+      <item index="3" class="java.lang.String" itemvalue="Python.svm_test" />
+      <item index="4" class="java.lang.String" itemvalue="Python.svm_with_save_E" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.svm_test" />
-        <item index="1" class="java.lang.String" itemvalue="Python.svm" />
-        <item index="2" class="java.lang.String" itemvalue="Python.build_features" />
-        <item index="3" class="java.lang.String" itemvalue="Python.build_dataset" />
-        <item index="4" class="java.lang.String" itemvalue="Python.rebuild_original_data" />
+        <item index="0" class="java.lang.String" itemvalue="Python.svm_with_save_E" />
+        <item index="1" class="java.lang.String" itemvalue="Python.svm_test" />
+        <item index="2" class="java.lang.String" itemvalue="Python.svm" />
+        <item index="3" class="java.lang.String" itemvalue="Python.build_features" />
+        <item index="4" class="java.lang.String" itemvalue="Python.build_dataset" />
       </list>
     </recent_temporary>
   </component>
@@ -502,11 +516,16 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="python-line">
           <url>file://$PROJECT_DIR$/svm/svm_test.py</url>
-          <line>98</line>
+          <line>99</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/svm/svm_with_save_E.py</url>
+          <line>111</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="14" />
+      <option name="time" value="15" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -739,9 +758,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/svm/svm_test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2521">
-          <caret line="219" column="42" selection-start-line="219" selection-start-column="42" selection-end-line="219" selection-end-column="42" />
-          <folding />
+        <state relative-caret-position="137">
+          <caret line="195" column="0" selection-start-line="195" selection-start-column="0" selection-end-line="195" selection-end-column="0" />
+          <folding>
+            <element signature="e#151#162#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/svm/svm_with_save_E.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" column="54" selection-start-line="13" selection-start-column="54" selection-end-line="13" selection-end-column="54" />
+          <folding>
+            <element signature="e#151#162#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

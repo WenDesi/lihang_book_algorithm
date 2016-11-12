@@ -11,8 +11,9 @@ import random
 
 class SVM(object):
 
-    def __init__(self, kernal='linear'):
+    def __init__(self, kernal='linear',epsilon = 0.001):
         self.kernal = kernal
+        self.epsilon = epsilon
 
     def _init_parameters(self, features, labels):
         '''
@@ -25,18 +26,28 @@ class SVM(object):
         self.n = len(features[0])
         self.N = len(features)
         self.alpha = [0.0] * self.N
+        self.E = [self._E_(i) for i in xrange(self.N)]
 
-        self.C = 1000
-        self.Max_Interation = 5000
+        self.C = 10
+        self.Max_Interation = 50000
+
 
     def _satisfy_KKT(self, i):
         ygx = self.Y[i] * self._g_(i)
-        if self.alpha[i] == 0:
-            return ygx > 0 or ygx == 0
-        elif self.alpha[i] == self.C:
+        if abs(self.alpha[i])<self.epsilon:
+            return ygx > 1 or ygx == 1
+        elif abs(self.alpha[i]-self.C)<self.epsilon:
             return ygx < 1 or ygx == 1
         else:
-            return ygx == 1
+            return abs(ygx-1) < self.epsilon
+
+    def is_stop(self):
+        for i in xrange(self.N):
+            satisfy = self._satisfy_KKT(i)
+
+            if not satisfy:
+                return False
+        return True
 
     def _select_two_parameters(self):
         index_list = [i for i in xrange(self.N)]
@@ -48,17 +59,17 @@ class SVM(object):
         i1_list.extend(i1_list_2)
 
         for i in i1_list:
-            if not self._satisfy_KKT(i):
+            if self._satisfy_KKT(i):
                 continue
 
-            E1 = self._E_(i)
+            E1 = self.E[i]
             max_ = (0, 0)
 
             for j in index_list:
                 if i == j:
                     continue
 
-                E2 = self._E_(j)
+                E2 = self.E[j]
                 if abs(E1 - E2) > max_[0]:
                     max_ = (abs(E1 - E2), j)
 
@@ -98,6 +109,9 @@ class SVM(object):
         self._init_parameters(features, labels)
 
         for times in xrange(self.Max_Interation):
+            if self.is_stop():
+                return
+
             print 'iterater %d' % times
 
             i1, i2 = self._select_two_parameters()
@@ -109,8 +123,8 @@ class SVM(object):
                 L = max(0, self.alpha[i2] + self.alpha[i1] - self.C)
                 H = min(self.C, self.alpha[i2] + self.alpha[i1])
 
-            E1 = self._E_(i1)
-            E2 = self._E_(i2)
+            E1 = self.E[i1]
+            E2 = self.E[i2]
             eta = self._K_(self.X[i1], self.X[i1]) + self._K_(self.X[i2], self.X[i2]) - 2 * self._K_(self.X[i1], self.X[i2])     # 公式(7.107)
 
             alpha2_new_unc = self.alpha[i2] + self.Y[i2] * (E1 - E2) / eta        # 公式(7.106)
@@ -143,6 +157,10 @@ class SVM(object):
             self.alpha[i1] = alph1_new
             self.alpha[i2] = alph2_new
             self.b = b_new
+
+            self.E[i1] = self._E_(i1)
+            self.E[i2] = self._E_(i2)
+
 
     def _predict_(self,feature):
         result = self.b
@@ -216,7 +234,6 @@ if __name__ == "__main__":
     #
     # train_features,train_labels = [[3,3],[4,4],[1,1]],[1,1,-1]
     # test_features,test_labels = [[0,0],[0,3],[0,6]],[-1,-1,1]
-
     time1 = time.time()
     svm = SVM()
     svm.train(train_features,train_labels)

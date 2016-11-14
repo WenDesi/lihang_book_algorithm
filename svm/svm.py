@@ -3,18 +3,26 @@
 # @Date:   12-11-16
 # @Email:  wendesi@foxmail.com
 # @Last modified by:   WenDesi
-# @Last modified time: 12-11-16
+# @Last modified time: 13-11-16
+
+
 
 import time
-import csv
 import random
+import logging
+
+import pandas as pd
+from sklearn.cross_validation import train_test_split
+from sklearn.metrics import accuracy_score
 
 from generate_dataset import *
 
+
+
 class SVM(object):
 
-    def __init__(self, kernal='linear',epsilon = 0.001):
-        self.kernal = kernal
+    def __init__(self, kernel='linear',epsilon = 0.001):
+        self.kernel = kernel
         self.epsilon = epsilon
 
     def _init_parameters(self, features, labels):
@@ -30,7 +38,7 @@ class SVM(object):
         self.alpha = [0.0] * self.N
         self.E = [self._E_(i) for i in xrange(self.N)]
 
-        self.C = 10
+        self.C = 1000
         self.Max_Interation = 5000
 
 
@@ -52,6 +60,9 @@ class SVM(object):
         return True
 
     def _select_two_parameters(self):
+        '''
+        按照书上7.4.2选择两个变量
+        '''
         index_list = [i for i in xrange(self.N)]
 
         i1_list_1 = filter(lambda i: self.alpha[i] > 0 and self.alpha[i] < self.C, index_list)
@@ -82,8 +93,12 @@ class SVM(object):
         核函数
         '''
 
-        if self.kernal == 'linear':
+        if self.kernel == 'linear':
             return sum([x1[k] * x2[k] for k in xrange(self.n)])
+        if self.kernel == 'poly':
+            return (sum([x1[k] * x2[k] for k in xrange(self.n)])+1)**3
+
+
 
         print '没有定义核函数'
         return 0
@@ -103,18 +118,26 @@ class SVM(object):
         '''
         公式(7.105)
         '''
-
         return self._g_(i) - self.Y[i]
+
+    def try_E(self,i):
+        result = self.b-self.Y[i]
+        for j in xrange(self.N):
+            if self.alpha[j]<0 or self.alpha[j]>self.C:
+                continue
+            result += self.Y[j]*self.alpha[j]*self._K_(self.X[i],self.X[j])
+        return result
+
 
     def train(self, features, labels):
 
         self._init_parameters(features, labels)
 
         for times in xrange(self.Max_Interation):
-            if self.is_stop():
-                return
+            # if self.is_stop():
+            #     return
 
-            print 'iterater %d' % times
+            logging.debug('iterater %d' % times)
 
             i1, i2 = self._select_two_parameters()
 
@@ -183,34 +206,32 @@ class SVM(object):
         return results
 
 
-def read_csv(filepath):
-    reader = csv.reader(file(filepath, 'rb'))
-
-    result = []
-    for line in reader:
-        result.append(line)
-    return result
-
-def split_features_labels(dataset):
-    labels = map(lambda x:float(x[0]),dataset)
-    features = map(lambda x:x[1:],dataset)
-
-    for i in xrange(len(dataset)):
-        for j in xrange(len(features[0])):
-            features[i][j] = float(features[i][j])
-
-    return features,labels
-
 if __name__ == "__main__":
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
 
+    print 'Start read data'
+
+    time_1 = time.time()
+
+    # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
     train_features, train_labels, test_features, test_labels = generate_dataset(2000,visualization=False)
 
-    time1 = time.time()
-    svm = SVM()
-    svm.train(train_features,train_labels)
-    test_predict = svm.predict(test_features)
+    time_2 = time.time()
+    print 'read data cost ',time_2 - time_1,' second','\n'
 
-    accuracy = sum([test_labels[i]==test_predict[i] for i in xrange(len(test_predict))])
-    print 'accuracy is ', float(accuracy)/float(len(test_labels))
-    time2 = time.time()
-    print 'cost ',time2-time1
+    print 'Start training'
+    svm = SVM()
+    svm.train(train_features, train_labels)
+
+    time_3 = time.time()
+    print 'training cost ',time_3 - time_2,' second','\n'
+
+    print 'Start predicting'
+    test_predict = svm.predict(test_features)
+    time_4 = time.time()
+    print 'predicting cost ',time_4 - time_3,' second','\n'
+
+    score = accuracy_score(test_labels,test_predict)
+    print "svm1 the accruacy socre is ", score
+

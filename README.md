@@ -46,4 +46,8 @@
 <br>代码：[maxENT/maxENT.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/maxENT/maxENT.py)
 
 ### 第七章 支持向量机
+博客：[李航《统计学习方法》第七章——用Python实现支持向量机模型（伪造数据集）](http://blog.csdn.net/wds2006sdo/article/details/53156589)
+<br>代码：[svm/svm.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/svm/svm.py)
+
+### 第八章 提升方法
 正在施工中...

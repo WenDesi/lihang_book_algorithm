@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="045e9bf9-f3f7-4538-969d-2b496007acc0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/svm/generate_dataset.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/svm/svm_vs_lr.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/svm/test.csv" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/svm/train.csv" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm/svm_test.py" afterPath="$PROJECT_DIR$/svm/svm_test.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/svm/svm_with_save_E.py" afterPath="$PROJECT_DIR$/svm/svm_with_save_E.py" />
-    </list>
+    <list default="true" id="045e9bf9-f3f7-4538-969d-2b496007acc0" name="Default" comment="" />
     <ignored path="mnist_test.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -48,11 +40,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="svm.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="svm.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/svm/svm.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1036">
-              <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+            <state relative-caret-position="532">
+              <caret line="237" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
               <folding>
                 <element signature="e#153#164#0" expanded="true" />
               </folding>
@@ -60,11 +52,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="svm_test.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="svm_test.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/svm/svm_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="27" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
+            <state relative-caret-position="315">
+              <caret line="15" column="12" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="12" />
               <folding />
             </state>
           </provider>
@@ -602,8 +594,13 @@
           <line>44</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" type="python-line">
+          <url>file://$PROJECT_DIR$/svm/svm_test.py</url>
+          <line>7</line>
+          <option name="timeStamp" value="16" />
+        </line-breakpoint>
       </breakpoints>
-      <option name="time" value="16" />
+      <option name="time" value="17" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -878,14 +875,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/svm/svm_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="27" column="18" selection-start-line="0" selection-start-column="0" selection-end-line="58" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/svm/svm_with_save_E.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-126">
@@ -926,11 +915,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/svm/svm.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1036">
-          <caret line="63" column="23" selection-start-line="63" selection-start-column="23" selection-end-line="63" selection-end-column="23" />
+        <state relative-caret-position="532">
+          <caret line="237" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="237" selection-end-column="0" />
           <folding>
             <element signature="e#153#164#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/svm/svm_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="15" column="12" selection-start-line="15" selection-start-column="5" selection-end-line="15" selection-end-column="12" />
+          <folding />
         </state>
       </provider>
     </entry>

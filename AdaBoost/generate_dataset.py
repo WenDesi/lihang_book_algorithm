@@ -134,3 +134,104 @@ if __name__ == '__main__':
     # X,y,w = mk_data(size,False)
     #
     # data_visualization(X,y)
+# encoding=utf8
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# #encoding=utf-8
+# # @Author: wendesi
+# # @Date:   15-11-16
+# # @Email:  wendesi@foxmail.com
+# # @Last modified by:   wendesi
+# # @Last modified time: 15-11-16
+#
+#
+#
+#
+# import random
+#
+# def generate(size,point,radius,label):
+#     results = []
+#
+#     for i in xrange(size):
+#         result = [label]
+#
+#         for j in xrange(len(point)):
+#             x = point[j]+random.randint(-radius,radius)
+#             result.append(x)
+#
+#         results.append(result)
+#
+#     return results
+#
+#
+# def generate_dataset(size):
+#     class1 = generate(size/2,(0,0),10,-1)
+#     class2 = generate(size-size/2,(21,21),10,1)
+#
+#     class_ = class1
+#     class_.extend(class2)
+#
+#     random.shuffle(class_)
+#
+#     split_point = int(float(size)*0.333)
+#     testset = class_[:split_point]
+#     trainset = class_[split_point:]
+#
+#     trainset_features = map(lambda x:x[1:],trainset)
+#     trainset_labels = map(lambda x:x[0],trainset)
+#
+#     testset_features = map(lambda x:x[1:],testset)
+#     testset_labels = map(lambda x:x[0],testset)
+#
+#     return trainset_features,trainset_labels,testset_features,testset_labels
+#
+#
+# if __name__ == '__main__':
+#
+#     size = 1000
+#     generate_dataset(size)
+#
+#     # generate_dataset
+#     # print sign
+#     # sign = np.vectorize(sign)
+#     # X,y,w = mk_data(size,False)
+#     #
+#     # data_visualization(X,y)

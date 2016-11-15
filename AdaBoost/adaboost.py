@@ -6,6 +6,7 @@
 # @Last modified time: 15-11-16
 
 import math
+import logging
 
 class Sign(object):
     def __init__(self,features,labels,w):
@@ -15,15 +16,19 @@ class Sign(object):
 
         self.w = w
 
+        mmax = max(self.X)
+        self.indexes = self.X[:]
+        self.indexes.append(mmax+1)
+
     def _train_less_than_(self):
         index = -1
         error_score = 1000000
 
-        for i in xrange(self.N+1):
+        for i in self.indexes:
             score = 0
             for j in xrange(self.N):
                 val = -1
-                if j<i:
+                if self.X[j]<i:
                     val = 1
 
                 if val*self.Y[j]<0:
@@ -41,11 +46,11 @@ class Sign(object):
         index = -1
         error_score = 1000000
 
-        for i in xrange(self.N+1):
+        for i in self.indexes:
             score = 0
             for j in xrange(self.N):
                 val = 1
-                if j<i:
+                if self.X[j]<i:
                     val = -1
 
                 if val*self.Y[j]<0:
@@ -95,7 +100,7 @@ class AdaBoost(object):
 
         self.n = len(features[0])
         self.N = len(features)
-        self.M = 100                            # 分类器数目
+        self.M = 10000                            # 分类器数目
 
         self.w = [1.0/self.N]*self.N
         self.alpha = []
@@ -117,6 +122,7 @@ class AdaBoost(object):
         self._init_parameters_(features,labels)
 
         for times in xrange(self.M):
+            logging.debug('iterater %d' % times)
 
             best_classifier = (100000,None,None)        #(误差率,分类器,针对的特征)
             for i in xrange(self.n):
@@ -125,16 +131,43 @@ class AdaBoost(object):
                 error_score = classifier.train()
 
                 if error_score < best_classifier[0]:
-                    best_classifier = (error_score,classifier,i)
+                    best_classifier = (error_score,i,classifier)
 
             em = best_classifier[0]
-            self.alpha.append(1/2*math.log((1-em)/em))
+            if em==0:
+                self.alpha.append(100)
+            else:
+                self.alpha.append(0.5*math.log((1-em)/em))
+
             self.classifier.append(best_classifier[1:])
 
             Z = self._Z_(best_classifier[1],best_classifier[2])
 
             for i in xrange(self.N):
                 self.w[i] = self._w_(best_classifier[1],best_classifier[2],i)/Z
+
+    def _predict_(self,feature):
+
+        result = 0.0
+        for i in xrange(self.M):
+            index = self.classifier[i][0]
+            classifier = self.classifier[i][1]
+
+            result += self.alpha[i]*classifier.predict(feature[index])
+
+        if result>0:
+            return 1
+        return -1
+
+
+
+    def predict(self,features):
+        results = []
+
+        for feature in features:
+            results.append(self._predict_(feature))
+
+        return results
 
 if __name__ == '__main__':
     features = [[0],[1],[2],[3],[4],[5],[6],[7],[8],[9]]

@@ -134,3 +134,4 @@ if __name__ == '__main__':
     # X,y,w = mk_data(size,False)
     #
     # data_visualization(X,y)
+# encoding=utf8

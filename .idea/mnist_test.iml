@@ -6,5 +6,6 @@
     <orderEntry type="module" module-name="test" />
     <orderEntry type="module" module-name="sci_Gastrointestinal_graph" />
     <orderEntry type="module" module-name="sci_symptom_test" />
+    <orderEntry type="module" module-name="python_cpp" />
   </component>
 </module>

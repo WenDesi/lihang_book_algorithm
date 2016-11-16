@@ -5,8 +5,17 @@
 # @Last modified by:   wendesi
 # @Last modified time: 15-11-16
 
+import cv2
+import time
 import math
 import logging
+import numpy as np
+import pandas as pd
+
+from sklearn.cross_validation import train_test_split
+from sklearn.metrics import accuracy_score
+
+sign_time_count = 0
 
 class Sign(object):
     def __init__(self,features,labels,w):
@@ -16,9 +25,7 @@ class Sign(object):
 
         self.w = w
 
-        mmax = max(self.X)
-        self.indexes = self.X[:]
-        self.indexes.append(mmax+1)
+        self.indexes = [0,1,2]
 
     def _train_less_than_(self):
         index = -1
@@ -63,8 +70,12 @@ class Sign(object):
         return index,error_score
 
     def train(self):
+        global sign_time_count
+        time1 = time.time()
         less_index,less_score = self._train_less_than_()
         more_index,more_score = self._train_more_than_()
+        time2 = time.time()
+        sign_time_count += time2-time1
 
         if less_score < more_score:
             self.is_less = True
@@ -77,7 +88,7 @@ class Sign(object):
             return more_score
 
     def predict(self,feature):
-        if self.is_less:
+        if self.is_less>0:
             if feature<self.index:
                 return 1.0
             else:
@@ -100,7 +111,7 @@ class AdaBoost(object):
 
         self.n = len(features[0])
         self.N = len(features)
-        self.M = 100000                            # 分类器数目
+        self.M = 60                            # 分类器数目
 
         self.w = [1.0/self.N]*self.N
         self.alpha = []
@@ -124,9 +135,14 @@ class AdaBoost(object):
         for times in xrange(self.M):
             logging.debug('iterater %d' % times)
 
+            time1 = time.time()
+            map_time = 0
+
             best_classifier = (100000,None,None)        #(误差率,分类器,针对的特征)
             for i in xrange(self.n):
+                map_time -= time.time()
                 features = map(lambda x:x[i],self.X)
+                map_time += time.time()
                 classifier = Sign(features,self.Y,self.w)
                 error_score = classifier.train()
 
@@ -134,6 +150,15 @@ class AdaBoost(object):
                     best_classifier = (error_score,i,classifier)
 
             em = best_classifier[0]
+
+            # 分析用，之后删除 开始
+            print 'em is %s, index is %d' % (str(em),best_classifier[1])
+            time2 = time.time()
+            global sign_time_count
+            print '总运行时间:%s, 那两段关键代码运行时间:%s, map的时间是:%s' % (str(time2-time1),str(sign_time_count),str(map_time))
+            sign_time_count = 0
+            # 分析用，之后删除  结束
+
             if em==0:
                 self.alpha.append(100)
             else:
@@ -169,7 +194,32 @@ class AdaBoost(object):
 
         return results
 
+# 二值化
+def binaryzation(img):
+    cv_img = img.astype(np.uint8)
+    cv2.threshold(cv_img,50,1,cv2.cv.CV_THRESH_BINARY_INV,cv_img)
+    return cv_img
+
+def binaryzation_features(trainset):
+    features = []
+
+    for img in trainset:
+        img = np.reshape(img,(28,28))
+        cv_img = img.astype(np.uint8)
+
+        img_b = binaryzation(cv_img)
+        # hog_feature = np.transpose(hog_feature)
+        features.append(img_b)
+
+    features = np.array(features)
+    features = np.reshape(features,(-1,784))
+
+    return features
+
 if __name__ == '__main__':
+    logger = logging.getLogger()
+    logger.setLevel(logging.DEBUG)
+
     print 'Start read data'
 
     time_1 = time.time()
@@ -182,12 +232,14 @@ if __name__ == '__main__':
 
 
     # 选取 2/3 数据作为训练集， 1/3 数据作为测试集
-    train_features, test_features, train_labels, test_labels = train_test_split(imgs, labels, test_size=0.33, random_state=23323)
+    features = binaryzation_features(imgs)
+    train_features, test_features, train_labels, test_labels = train_test_split(features, labels, test_size=0.5, random_state=0)
 
     time_2 = time.time()
     print 'read data cost ',time_2 - time_1,' second','\n'
 
     print 'Start training'
+    train_labels = map(lambda x:2*x-1,train_labels)
     ada = AdaBoost()
     ada.train(train_features, train_labels)
 
@@ -199,5 +251,6 @@ if __name__ == '__main__':
     time_4 = time.time()
     print 'predicting cost ',time_4 - time_3,' second','\n'
 
+    test_labels = map(lambda x:2*x-1,test_labels)
     score = accuracy_score(test_labels,test_predict)
     print "The accruacy socre is ", score

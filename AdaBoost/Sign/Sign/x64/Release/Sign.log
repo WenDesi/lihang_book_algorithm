@@ -1,0 +1,16 @@
+﻿生成启动时间为 2016/11/16 19:54:45。
+     1>项目“E:\python\mnist_test\AdaBoost\Sign\Sign\Sign.vcxproj”在节点 2 上(Rebuild 个目标)。
+     1>ClCompile:
+         F:\vs2012\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /O2 /Oi /GL /D WIN32 /D NDEBUG /D _WINDOWS /D _USRDLL /D SIGN_EXPORTS /D _WINDLL /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc110.pdb" /Gd /TP /errorReport:prompt sign.cpp
+         sign.cpp
+       Link:
+         F:\vs2012\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.dll" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.pdb" /SUBSYSTEM:WINDOWS /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.lib" /MACHINE:X64 /DLL x64\Release\sign.obj
+            正在创建库 E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.lib 和对象 E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.exp
+         正在生成代码
+         已完成代码的生成
+         Sign.vcxproj -> E:\python\mnist_test\AdaBoost\Sign\x64\Release\Sign.dll
+     1>已完成生成项目“E:\python\mnist_test\AdaBoost\Sign\Sign\Sign.vcxproj”(Rebuild 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:01.45

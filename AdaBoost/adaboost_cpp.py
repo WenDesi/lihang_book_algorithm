@@ -62,7 +62,7 @@ class AdaBoost(object):
 
         self.n = len(features[0])
         self.N = len(features)
-        self.M = 1000                            # 分类器数目
+        self.M = 100                            # 分类器数目
 
         self.w = [1.0/self.N]*self.N
         self.alpha = []

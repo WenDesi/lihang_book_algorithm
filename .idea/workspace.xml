@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="045e9bf9-f3f7-4538-969d-2b496007acc0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AdaBoost/adaboost_cpp.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/mnist_test.iml" afterPath="$PROJECT_DIR$/.idea/mnist_test.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/AdaBoost/ada_test.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AdaBoost/adaboost.py" afterPath="$PROJECT_DIR$/AdaBoost/adaboost.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AdaBoost/adaboost_cpp.py" afterPath="$PROJECT_DIR$/AdaBoost/adaboost_cpp.py" />
     </list>
     <ignored path="mnist_test.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,6 +23,7 @@
     <SUITE FILE_PATH="coverage/mnist_test$binary_perceptron.coverage" NAME="binary_perceptron Coverage Results" MODIFIED="1478593588448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/perceptron" />
     <SUITE FILE_PATH="coverage/mnist_test$adaboost_fakedata.coverage" NAME="adaboost_fakedata Coverage Results" MODIFIED="1479216687048" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AdaBoost" />
     <SUITE FILE_PATH="coverage/mnist_test$svm_vs_lr.coverage" NAME="svm_vs_lr Coverage Results" MODIFIED="1479089152052" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
+    <SUITE FILE_PATH="coverage/mnist_test$ada_test.coverage" NAME="ada_test Coverage Results" MODIFIED="1479345417623" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AdaBoost" />
     <SUITE FILE_PATH="coverage/lihang_book_algorithm$maxENT.coverage" NAME="maxENT Coverage Results" MODIFIED="1478540189924" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/maxENT" />
     <SUITE FILE_PATH="coverage/mnist_test$adaboost.coverage" NAME="adaboost Coverage Results" MODIFIED="1479296290627" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AdaBoost" />
     <SUITE FILE_PATH="coverage/mnist_test$logistic_regression.coverage" NAME="logistic_regression Coverage Results" MODIFIED="1478597251848" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/logistic_regression" />
@@ -38,7 +38,7 @@
     <SUITE FILE_PATH="coverage/mnist_test$maxENT.coverage" NAME="maxENT Coverage Results" MODIFIED="1478417048812" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/maxENT" />
     <SUITE FILE_PATH="coverage/mnist_test$svm.coverage" NAME="svm Coverage Results" MODIFIED="1478766960147" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_symptom_test/实验" />
     <SUITE FILE_PATH="coverage/mnist_test$generate_dataset.coverage" NAME="generate_dataset Coverage Results" MODIFIED="1479039590098" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/svm" />
-    <SUITE FILE_PATH="coverage/mnist_test$adaboost_cpp.coverage" NAME="adaboost_cpp Coverage Results" MODIFIED="1479297715830" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AdaBoost" />
+    <SUITE FILE_PATH="coverage/mnist_test$adaboost_cpp.coverage" NAME="adaboost_cpp Coverage Results" MODIFIED="1479299045247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/AdaBoost" />
     <SUITE FILE_PATH="coverage/mnist_test$anlysis_message.coverage" NAME="anlysis_message Coverage Results" MODIFIED="1478658655552" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/../sci_Gastrointestinal_graph" />
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -50,11 +50,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="adaboost_cpp.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="adaboost_cpp.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AdaBoost/adaboost_cpp.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="197" column="24" selection-start-line="197" selection-start-column="24" selection-end-line="197" selection-end-column="24" />
+            <state relative-caret-position="84">
+              <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+              <folding>
+                <element signature="e#151#161#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ada_test.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/AdaBoost/ada_test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="315">
+              <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
               <folding>
                 <element signature="e#151#161#0" expanded="true" />
               </folding>
@@ -100,6 +112,7 @@
         <option value="E:/C++/python_cpp/connect_test.py" />
         <option value="$PROJECT_DIR$/AdaBoost/adaboost.py" />
         <option value="$PROJECT_DIR$/AdaBoost/adaboost_cpp.py" />
+        <option value="$PROJECT_DIR$/AdaBoost/ada_test.py" />
       </list>
     </option>
   </component>
@@ -142,38 +155,7 @@
     <panes>
       <pane id="Scope" />
       <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mnist_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mnist_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mnist_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mnist_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="mnist_test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="svm" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
+        <subPane />
       </pane>
       <pane id="Scratches" />
     </panes>
@@ -184,25 +166,7 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Python.adaboost_cpp">
-    <configuration default="false" name="svm_vs_lr" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="F:\Anaconda\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/svm" />
-      <option name="IS_MODULE_SDK" value="false" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <module name="mnist_test" />
-      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/svm/svm_vs_lr.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <method />
-    </configuration>
+  <component name="RunManager" selected="Python.ada_test">
     <configuration default="false" name="adaboost" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -271,6 +235,24 @@
       <module name="mnist_test" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AdaBoost/adaboost_cpp.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <method />
+    </configuration>
+    <configuration default="false" name="ada_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="F:\Anaconda\python.exe" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/AdaBoost" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <module name="mnist_test" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" enabled="false" sample_coverage="true" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/AdaBoost/ada_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <method />
@@ -484,19 +466,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="Python.svm_vs_lr" />
-      <item index="1" class="java.lang.String" itemvalue="Python.adaboost" />
-      <item index="2" class="java.lang.String" itemvalue="Python.adaboost_fakedata" />
-      <item index="3" class="java.lang.String" itemvalue="Python.connect_test" />
-      <item index="4" class="java.lang.String" itemvalue="Python.adaboost_cpp" />
+      <item index="0" class="java.lang.String" itemvalue="Python.adaboost" />
+      <item index="1" class="java.lang.String" itemvalue="Python.adaboost_fakedata" />
+      <item index="2" class="java.lang.String" itemvalue="Python.connect_test" />
+      <item index="3" class="java.lang.String" itemvalue="Python.adaboost_cpp" />
+      <item index="4" class="java.lang.String" itemvalue="Python.ada_test" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Python.adaboost_cpp" />
-        <item index="1" class="java.lang.String" itemvalue="Python.adaboost" />
-        <item index="2" class="java.lang.String" itemvalue="Python.connect_test" />
-        <item index="3" class="java.lang.String" itemvalue="Python.adaboost_fakedata" />
-        <item index="4" class="java.lang.String" itemvalue="Python.svm_vs_lr" />
+        <item index="0" class="java.lang.String" itemvalue="Python.ada_test" />
+        <item index="1" class="java.lang.String" itemvalue="Python.adaboost_cpp" />
+        <item index="2" class="java.lang.String" itemvalue="Python.adaboost" />
+        <item index="3" class="java.lang.String" itemvalue="Python.connect_test" />
+        <item index="4" class="java.lang.String" itemvalue="Python.adaboost_fakedata" />
       </list>
     </recent_temporary>
   </component>
@@ -577,13 +559,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/svm/svm.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/svm/svm_with_save_E.py" />
     <entry file="file://$PROJECT_DIR$/svm/generate_dataset.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -909,8 +884,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AdaBoost/adaboost_cpp.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="197" column="24" selection-start-line="197" selection-start-column="24" selection-end-line="197" selection-end-column="24" />
+        <state relative-caret-position="84">
+          <caret line="61" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="208" selection-end-column="0" />
+          <folding>
+            <element signature="e#151#161#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AdaBoost/ada_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="222" column="0" selection-start-line="222" selection-start-column="0" selection-end-line="222" selection-end-column="0" />
           <folding>
             <element signature="e#151#161#0" expanded="true" />
           </folding>

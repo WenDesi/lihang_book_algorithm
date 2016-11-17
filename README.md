@@ -50,4 +50,9 @@
 <br>代码：[svm/svm.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/svm/svm.py)
 
 ### 第八章 提升方法
+博客：[李航《统计学习方法》第八章——用Python+Cpp实现AdaBoost算法（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/53195725)
+<br>纯Python代码：[AdaBoost/adaboost.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost.py)
+<br>Python C++代码：[AdaBoost/adaboost_cpp.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost_cpp.py),[AdaBoost/Sign/Sign/sign.h](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.h),[AdaBoost/Sign/Sign/sign.cpp](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.cpp)
+
+### 第九章 EM算法及其推广
 正在施工中...

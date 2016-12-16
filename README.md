@@ -16,6 +16,7 @@
 
 ## 简介
 我这里不介绍任何机器学习算法的原理，只是将《统计学习方法》中每一章的算法用我自己的方式实现一遍。
+除了李航书上的算法外，还实现了一些其他机器学习的算法。
 
 那么我们就按章节来了
 
@@ -56,3 +57,8 @@
 
 ### 第九章 EM算法及其推广
 正在施工中...
+
+## 额外章节
+###softmax分类器
+博客：[python 实现 softmax分类器（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/53699778)
+<br>代码：[softmax/softmax.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/softmax/softmax.py)

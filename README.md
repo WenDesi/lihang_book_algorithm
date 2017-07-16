@@ -9,10 +9,8 @@
 
 
 # lihang_book_algorithm
-
-哇！看到有人star这个项目了
-本来打算把这个项目当成一个备份的
-但既然有人star了，那么就要好好对待啦！！！
+被李航老师肯定啦！！开心！
+![](https://raw.githubusercontent.com/WenDesi/lihang_book_algorithm/master/weibo.png)
 
 ## 简介
 我这里不介绍任何机器学习算法的原理，只是将《统计学习方法》中每一章的算法用我自己的方式实现一遍。
@@ -55,7 +53,7 @@
 <br>纯Python代码：[AdaBoost/adaboost.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost.py)
 <br>Python C++代码：[AdaBoost/adaboost_cpp.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost_cpp.py),[AdaBoost/Sign/Sign/sign.h](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.h),[AdaBoost/Sign/Sign/sign.cpp](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.cpp)
 
-### 第十章 EM算法及其推广
+### 第十章 隐马尔科夫模型
 博客：[李航《统计学习方法》第十章——用Python实现隐马尔科夫模型](http://blog.csdn.net/wds2006sdo/article/details/75212599)
 <br>代码：[hmm/hmm.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/hmm/hmm.py)
 

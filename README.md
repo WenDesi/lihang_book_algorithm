@@ -10,7 +10,7 @@
 
 # lihang_book_algorithm
 被李航老师肯定啦！！开心！
-![](https://raw.githubusercontent.com/WenDesi/lihang_book_algorithm/master/weibo.png)
+<br>![](https://raw.githubusercontent.com/WenDesi/lihang_book_algorithm/master/weibo.png)
 
 ## 简介
 我这里不介绍任何机器学习算法的原理，只是将《统计学习方法》中每一章的算法用我自己的方式实现一遍。

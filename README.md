@@ -55,10 +55,13 @@
 <br>纯Python代码：[AdaBoost/adaboost.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost.py)
 <br>Python C++代码：[AdaBoost/adaboost_cpp.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/adaboost_cpp.py),[AdaBoost/Sign/Sign/sign.h](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.h),[AdaBoost/Sign/Sign/sign.cpp](https://github.com/WenDesi/lihang_book_algorithm/blob/master/AdaBoost/Sign/Sign/sign.cpp)
 
-### 第九章 EM算法及其推广
-正在施工中...
+### 第十章 EM算法及其推广
+博客：[李航《统计学习方法》第十章——用Python实现隐马尔科夫模型](http://blog.csdn.net/wds2006sdo/article/details/75212599)
+<br>代码：[hmm/hmm.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/hmm/hmm.py)
+
 
 ## 额外章节
+
 ###softmax分类器
 博客：[python 实现 softmax分类器（MNIST数据集）](http://blog.csdn.net/wds2006sdo/article/details/53699778)
 <br>代码：[softmax/softmax.py](https://github.com/WenDesi/lihang_book_algorithm/blob/master/softmax/softmax.py)

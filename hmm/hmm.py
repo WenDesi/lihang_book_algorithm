@@ -1,7 +1,6 @@
 # encoding=utf8
 
 import numpy as np
-import csv
 
 class HMM(object):
     def __init__(self,N,M):
@@ -21,7 +20,8 @@ class HMM(object):
 
     def forward(self):
         """
-        前向算法
+        算法 10.2
+        观测序列概率的前向算法
         """
         self.alpha = np.zeros((self.T,self.N))
 
@@ -39,7 +39,8 @@ class HMM(object):
 
     def backward(self):
         """
-        后向算法
+        算法 10.3
+        观测序列概率的后向算法
         """
         self.beta = np.zeros((self.T,self.N))
 
@@ -98,6 +99,10 @@ class HMM(object):
                 self.B[i][j] = randomlist[j]/Sum
 
     def train(self, O, MaxSteps = 100):
+        """
+        算法 10.4
+        Baum-Welch算法
+        """
         self.T = len(O)
         self.O = O
 
@@ -116,7 +121,10 @@ class HMM(object):
             self.forward()
             self.backward()
 
-            # a_{ij}
+            """
+            公式 10.39
+            计算a_{ij}
+            """
             for i in range(self.N):
                 for j in range(self.N):
                     numerator=0.0
@@ -126,7 +134,10 @@ class HMM(object):
                         denominator += self.cal_gamma(i,t)
                     tmp_A[i][j] = numerator/denominator
 
-            # b_{jk}
+            """
+            公式 10.40
+            计算b_{jk}
+            """
             for j in range(self.N):
                 for k in range(self.M):
                     numerator = 0.0
@@ -137,7 +148,10 @@ class HMM(object):
                         denominator += self.cal_gamma(j,t)
                     tmp_B[j][k] = numerator / denominator
 
-            # pi_i
+            """
+            公式 10.41
+            计算pi_i
+            """
             for i in range(self.N):
                 tmp_pi[i] = self.cal_gamma(i,0)
 
@@ -146,40 +160,25 @@ class HMM(object):
             self.Pi = tmp_pi
 
     def generate(self, length):
-        import random
+        """
+        算法 10.1
+        观测序列的生成
+        """
         I = []
-
-        # start
-        ran = random.randint(0,1000)/1000.0
-        i = 0
-        while self.Pi[i]<ran or self.Pi[i]<0.0001:
-            ran -= self.Pi[i]
-            i += 1
-        I.append(i)
+        I.append(int(np.random.choice(range(self.N), 1, list(self.Pi))))
 
         # 生成状态序列
-        for i in range(1,length):
-            last = I[-1]
-            ran = random.randint(0, 1000) / 1000.0
-            i = 0
-            while self.A[last][i] < ran or self.A[last][i]<0.0001:
-                ran -= self.A[last][i]
-                i += 1
-            I.append(i)
-
-        # 生成观测序列
-        Y = []
-        for i in range(length):
-            k = 0
-            ran = random.randint(0, 1000) / 1000.0
-            while self.B[I[i]][k] < ran or self.B[I[i]][k]<0.0001:
-                ran -= self.B[I[i]][k]
-                k += 1
-            Y.append(k)
-
-        return Y
-
-
+        for t in range(1,length):
+            I.append(int(np.random.choice(range(self.N), 1, p = list(self.A[I[t-1]]))))
+        
+        #生成观测序列
+        O = []
+        for t in range(length):
+            O.append(int(np.random.choice(range(self.M), 1, p = list(self.B[I[t]]))))
+        
+        return O
+    
+    
 
 def triangle(length):
     '''
@@ -198,7 +197,7 @@ def triangle(length):
 
 def sin(length):
     '''
-    三角波
+    sin波
     '''
     import math
     X = [i for i in range(length)]
@@ -235,4 +234,5 @@ if __name__ == '__main__':
     # y = hmm.generate(100)
     # x = [i for i in range(100)]
     # show_data(x,y)
-
+    
+    
